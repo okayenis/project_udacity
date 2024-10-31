@@ -26,12 +26,6 @@ stages:
   - job: BuildJob
     pool: myAgentPool
     steps:
-    - script: |
-        export PATH=$HOME/.local/bin:$PATH
-        python3 -m pip install -r requirements.txt
-      workingDirectory: $(projectRoot)
-      displayName: "myStep 1"
-
     - script: sudo apt-get install -y zip
       displayName: "Install zip utility"
 

@@ -9,7 +9,7 @@ variables:
   webAppName: 'flaskprojectapp'
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  poolName: 'myAgentPool'
 
   # Environment name
   environmentName: 'flaskprojectapp'
@@ -24,7 +24,7 @@ stages:
   displayName: Build stage
   jobs:
   - job: BuildJob
-    pool: myAgentPool
+    pool: $(poolName)
     steps:
     - script: sudo apt-get install -y zip
       displayName: "Install zip utility"
@@ -48,8 +48,7 @@ stages:
   condition: succeeded()
   jobs:
   - deployment: DeploymentJob
-    pool:
-      vmImage: $(vmImageName)
+    pool: $(poolName)
     environment: $(environmentName)
     strategy:
       runOnce:
